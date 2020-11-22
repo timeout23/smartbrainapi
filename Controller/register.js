@@ -1,9 +1,5 @@
 const nev = require('node-email-validator');
-const mailgun = require("mailgun-js");
 require ('dotenv').config();
-const DOMAIN = 'https://api.mailgun.net/v3/sandboxac21fde8bcdf46188c030a5b020e7870.mailgun.org';
-const mg = mailgun({apiKey:'9a35572ac232acd4bfb75856e2b41fa6-2af183ba-c9890b76', domain: DOMAIN});
-
 
 const handleRegister=(db,bcrypt) => (req,res) => {
 	const { email, name, password, isEmailValid } = req.body;
@@ -44,21 +40,6 @@ const handleIsEmailValid = (req, res) =>{
 		res.json(validation.isEmailValid)
 	})
 	.catch(error => res.json(error));
-}
-const handleIsEmailverified = (req,res) =>{
-	const {email}=req.body;
-	const data = {
-	from: 'timmybaks2002@gmail.com',
-	to: email,
-	subject: 'Confirm Email',
-	text: 'Please click on link to activate your account',
-};
-mg.messages().send(data, function (error, body) {
-	res.json('message sent');
-	if (error)
-		console.log(error);
-});
-
 }
 
 module.exports={
