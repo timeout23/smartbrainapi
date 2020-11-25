@@ -3,7 +3,7 @@ require ('dotenv').config();
 
 const handleRegister=(db,bcrypt) => (req,res) => {
 	const { email, name, password, isEmailValid } = req.body;
-	if(!email || !name || !password || isEmailValid){
+	if(!email || !name || !password || isEmailValid===false){
 		return res.json('invalid entry');
 	}
 	
