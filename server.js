@@ -21,15 +21,12 @@ const db = knex ({
     database : 'smartbrain'
   }
 });
-db.select('*').from('users').then(data=>{
-	console.log(data);
-});
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 app.get('/',(req,res)=>{
-	res.json(database.users);
+	res.json('its working');
 }); 
 //signin
 app.post('/signin', signin.handleSignin(db,bcrypt) );
@@ -42,7 +39,8 @@ app.put('/image',image.handleImage(db));
 app.post('/imageapi',(req,res)=>image.handleApiCall(req,res));
 //email validation
 app.post ('/emailverify',(req,res)=>register.handleIsEmailValid(req,res));
-//email verification
-app.post ('/isverified', (req,res)=> register.handleIsEmailverified(req,res));
 
-app.listen(3001);
+const PORT= process.env.PORT
+app.listen(PORT||3001, ()=>{
+	console.log(`server is listening to port ${PORT}`)
+});

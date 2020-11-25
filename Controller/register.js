@@ -44,6 +44,5 @@ const handleIsEmailValid = (req, res) =>{
 
 module.exports={
 	handleRegister: handleRegister,
-	handleIsEmailValid: handleIsEmailValid,
-	handleIsEmailverified: handleIsEmailverified
+	handleIsEmailValid: handleIsEmailValid
 }
