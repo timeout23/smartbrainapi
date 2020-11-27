@@ -3,7 +3,7 @@ require ('dotenv').config();
 
 const handleRegister=(db,bcrypt) => (req,res) => {
 	const { email, name, password, isEmailValid } = req.body;
-	if(!email || !name || !password || isEmailValid===false){
+	if(!email || !name || !password || isEmailValid === false){
 		return res.json('invalid entry');
 	}
 	
@@ -24,13 +24,13 @@ const handleRegister=(db,bcrypt) => (req,res) => {
 					res.json(user[0]);
 				})
 				.catch(err=>{
-					res.status(400).json('Unable to register user');
+					res.status(400).json(err);
 				})
 		})
 		.then(trx.commit)
 		.catch(trx.rollback)
 	})
-	.catch(err=>res.status(400).json('unable to register'));
+	.catch(err=>res.status(400).json(err));
 }
 
 const handleIsEmailValid = (req, res) =>{
